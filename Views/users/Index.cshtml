@@ -1,0 +1,128 @@
+﻿@model IEnumerable<ProjetFrancois.Models.user>
+
+@{
+    ViewBag.Title = "Index";
+}
+<header>
+    <p>
+        @Html.ActionLink("Back to product", "Index", "produits")
+    </p>
+    <p>
+        @Html.ActionLink("Deconnexion", "Login", "users")
+    </p>
+</header>
+<h2>Gestion Utilisateurs</h2>
+
+<div class="users-container">
+    @foreach (var item in Model)
+    {
+        <div class="category-item">
+            <div><strong>Nom:</strong> @Html.DisplayFor(modelItem => item.nom)</div>
+            <div><strong>Prénom:</strong> @Html.DisplayFor(modelItem => item.prenom)</div>
+            <div><strong>Téléphone:</strong> @Html.DisplayFor(modelItem => item.Telephone)</div>
+            <div><strong>Email:</strong> @Html.DisplayFor(modelItem => item.email)</div>
+            <div><strong>Password:</strong> @Html.DisplayFor(modelItem => item.password)</div>
+            <div><strong>Titre:</strong> @Html.DisplayFor(modelItem => item.titre)</div>
+            <div class="category-actions">
+                @Html.ActionLink("Edit", "Edit", new { id = item.iduser }, new { @class = "btn btn-outline-primary btn-sm" }) |
+                @Html.ActionLink("Details", "Details", new { id = item.iduser }, new { @class = "btn btn-outline-secondary btn-sm" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.iduser }, new { @class = "btn btn-outline-danger btn-sm" })
+            </div>
+       
+        </div>
+    }
+</div>
+
+<style>
+    header {
+        background-color: #007bff; /* Primary color for consistency */
+        padding: 10px 20px;
+        text-align: center;
+        color: white;
+        font-family: Arial, sans-serif;
+    }
+
+        header p {
+            display: inline-block; /* Aligns links in a line when space permits */
+            margin: 0 10px; /* Provides spacing around links */
+        }
+
+    .btn-success {
+        background-color: #28a745;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        color: white;
+        text-decoration: none;
+        transition: background-color 0.2s ease-in-out;
+    }
+
+        .btn-success:hover {
+            background-color: #218838; /* Darker green on hover for better interaction */
+        }
+
+    .btn {
+        text-decoration: none;
+        color: white; /* Ensures text is white */
+        display: inline-block;
+        transition: color 0.2s ease-in-out;
+        background: dodgerblue;
+    }
+
+        .btn:hover {
+            text-decoration: underline; /* Adds an underline on hover for clarity */
+        }
+
+    .categories-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around; /* Better alignment for varying container sizes */
+        gap: 20px; /* Maintains space between cards */
+        padding: 20px 0; /* Adds vertical space within the container */
+    }
+
+    .category-item {
+        flex: 1;
+        min-width: 250px; /* Ensures cards don't get too small on larger screens */
+        max-width: calc(33.333% - 20px); /* Maximum width with responsiveness */
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background: #fff;
+        padding: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
+    }
+
+        .category-item:hover {
+            transform: scale(1.05); /* Slight scale to give a popping effect */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+    .category-actions {
+        padding-top: 20px; /* More space above actions for visual separation */
+        text-align: center;
+    }
+
+    .btn-outline-primary, .btn-outline-secondary, .btn-outline-danger {
+        border: none;
+        padding: 5px 10px;
+        margin: 0 5px; /* Space between buttons */
+        border-radius: 4px;
+        transition: background-color 0.2s, color 0.2s;
+    }
+
+        .btn-outline-primary:hover {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-outline-secondary:hover {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-outline-danger:hover {
+            background-color: #dc3545;
+            color: white;
+        }
+</style>

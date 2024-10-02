@@ -1,0 +1,94 @@
+﻿@model ProjetFrancois.Models.category
+
+@{
+    ViewBag.Title = "Details";
+}
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f7f7f7;
+        padding: 20px;
+    }
+
+    h2, h4 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .dl-horizontal {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        width: 50%;
+        margin: auto;
+    }
+
+    dt {
+        float: left;
+        clear: left;
+        width: 180px;
+        overflow: hidden;
+        text-align: left;
+        font-weight: bold;
+        color: #555;
+    }
+
+    dd {
+        margin-left: 200px;
+        color: #666;
+    }
+
+    p {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    a {
+        text-decoration: none;
+        color: #007bff;
+        margin: 0 10px;
+        padding: 5px 15px;
+        background: #f8f9fa;
+        border-radius: 4px;
+        transition: background-color 0.2s, color 0.2s;
+    }
+
+    a:hover {
+        background-color: #e9ecef;
+        color: #0056b3;
+        text-decoration: underline;
+    }
+
+  
+</style>
+
+<h2>Details</h2>
+
+<div>
+    <h4>category</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdCategorie }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<ProjetFrancois.Models.produit>
+
+<div id="paypal-payment-button"></div>
+
+@section scripts {
+    <script src="https://www.paypal.com/sdk/js?client-id=Abb9jMAzLGmxPQO8JMLspihGWNbPvsHKb6VujqWxPCLOMVAUi7Z-nMPJXSks1eOALLKi3pcUcpfMsLG5&currency=CAD"></script>
+    <script>
+        paypal.Buttons({
+            style: {
+                color: 'blue'
+            },
+            createOrder: function (data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '@ViewBag.prixTotal'
+                        }
+                    }]
+                });
+            },
+            onApprove: function (data, actions) {
+                return actions.order.capture().then(function (details) {
+                    window.location.replace('@Url.Action("Success", "Default")');
+                });
+            }
+        }).render('#paypal-payment-button');
+    </script>
+}
+
+<!-- Inclure les bibliothèques jQuery, Popper.js et Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

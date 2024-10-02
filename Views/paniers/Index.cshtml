@@ -1,0 +1,75 @@
+﻿@model IEnumerable<ProjetFrancois.Models.panier>
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    /* Style du titre */
+    h2 {
+        color: #333;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    /* Style de la table */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+        /* Style des en-têtes de colonne */
+        .table th {
+            background-color: #f2f2f2;
+            color: #333;
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        /* Style des cellules de données */
+        .table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+    /* Style des liens de modification et de suppression */
+    .action-link {
+        color: #007bff;
+        text-decoration: none;
+        margin-right: 10px;
+    }
+
+        .action-link:hover {
+            text-decoration: underline;
+        }
+</style>
+
+<h1>Gestion Produit</h1>
+<div class="container py-4">
+    <h2>Paniers</h2>
+    <table class="table">
+        <tr>
+            <th>Image</th>
+            <th>Prix</th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td><img src="@item.image" width="30%" alt="Image du Panier" /></td>
+                <td>@item.prix</td>
+                <td>
+                    @Html.ActionLink("Supprimer", "Delete", new { id = item.IdPanier }, new { @class = "action-link" })
+                    <form method="post" action="@Url.Action("payer","produits")">
+                        <button type="submit">Payer</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+    <p>
+        Nombre total de produits : @Model.Count()
+    </p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>

@@ -1,0 +1,131 @@
+﻿@model IEnumerable<ProjetFrancois.Models.produit>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Store</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl7/1L_dstPt3HV5HzF6Gvk/e3s4Wz6iJgD/+ub2oU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWTNAxipY" crossorigin="anonymous">
+    <style>
+        .products-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            gap: 20px;
+        }
+
+        .product-item {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: calc(33.333% - 20px);
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            background: #fff;
+            transition: transform .3s ease-in-out, box-shadow .3s ease-in-out;
+        }
+        header {
+            background-color: #007bff; /* Primary color for consistency */
+            padding: 10px 20px;
+            text-align: center;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+            header p {
+                display: inline-block; /* Aligns links in a line when space permits */
+                margin: 0 10px; /* Provides spacing around links */
+            }
+
+
+            .product-item:hover {
+                transform: scale(1.03);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            }
+
+        .product-img-top {
+            width: 80%;
+            height: auto;
+            margin-bottom: 1rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .product-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 0.5rem;
+        }
+
+        .product-price {
+            font-size: 1.1rem;
+            color: #555;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .product-link {
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+            padding: 0.175rem 0.55rem;
+            text-align: center;
+            border-radius: 4px;
+            margin: 0.5rem;
+            transition: all .2s ease-in-out;
+        }
+
+            .product-link:hover {
+                background-color: #0056b3;
+                border-color: #0056b3;
+            }
+    </style>
+</head>
+<header>
+    <p>
+        @Html.ActionLink("Ajouter Nouveau Produit", "Create")
+        @Html.ActionLink("Gestion des utilisateurs", "Index", "users")
+        @Html.ActionLink("Gestion categorie", "Index", "categories")
+    </p>
+    <p>
+        @Html.ActionLink("Deconnexion", "Login", "users")
+    </p>
+</header>
+<body>
+    <h1>Gestion Produit</h1>
+    <div class="container py-4">
+        <!-- The rest of your HTML content, such as the header and the Products title -->
+     
+        <div class="products-container">
+            @foreach (var item in Model)
+            {
+                <div class="product-item">
+                    <img src="@item.image" class="product-img-top" alt="@item.Categorie.Name">
+                    <div>
+                        <h5 class="product-title">@item.Categorie.Name</h5>
+                        <p class="product-price">@item.prix$</p>
+                    </div>
+                    <div>
+                        <a href="@Url.Action("Edit", "Produits", new { id = item.idproduit })" class="btn btn-outline-primary product-link">Edit</a>
+                        <a href="@Url.Action("Details", "Produits", new { id = item.idproduit })" class="btn btn-outline-primary product-link">Details</a>
+                        <a href="@Url.Action("Delete", "Produits", new { id = item.idproduit })" class="btn btn-outline-primary product-link">Delete</a>
+                    </div><br />
+                    <div>
+                        <form method="post" action="@Url.Action("Ajouterpanier")">
+                            <input type="hidden" name="id" value="@item.idproduit" />
+                            <button type="submit">Ajouter panier</button>
+                        </form>
+                    </div><br />
+                </div>
+            }
+        </div>
+    </div>
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+﻿
+@model ProjetFrancois.Models.user
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .error-message {
+            color: #ff0000;
+            margin-top: 5px;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        a {
+            display: block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form method="post" action="/users/Login">
+
+            @if (!string.IsNullOrEmpty(ViewBag.msg))
+            {
+                <h1 class="center">@ViewBag.msg</h1>
+            }
+            <center><p><b>Authentification</b> </p></center>
+            <div>
+                <label for="Email">Email :</label>
+                <input type="email" id="Email" name="Email" />
+            </div>
+
+            <div>
+                <label for="Motdepasse">Password :</label>
+                <input type="password" id="Password" name="Password" />
+            </div>
+
+            <div>
+                <input type="submit" value="Login" />
+            </div>
+
+        </form>
+        <p>
+            @Html.ActionLink("S'inscrire ici", "Create")
+        </p>
+    </div>
+</body>
+</html>
